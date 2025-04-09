@@ -27,8 +27,10 @@ export const sendProductToTelegram = async (
     }
 
     const message = `<b>🔥 Oferta ${topic}!</b>\n${link}`;
-    const priceTag = price ? `💰 <b>${price}</b>` : "";
-    const descriptionTag = description ? `<b>${description}</b>` : "";
+    const priceTag = price ? `💰Valor: <b>${price}</b>` : "";
+    const descriptionTag = description
+      ? `<b>Descricao: ${description}</b>`
+      : "";
 
     await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       chat_id: CHAT_ID,
