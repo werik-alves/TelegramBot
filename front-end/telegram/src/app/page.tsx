@@ -1,11 +1,16 @@
 import Image from "next/image";
-import TelaDeLogin from "./(page)/login/page";
-import HomePage from "./(page)/home/page";
+import { LoginPage } from "./(page)/login/page";
+import HomePage from "./(page)/homee/page";
+import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <>
-      {/* <TelaDeLogin/> */}
-      <HomePage/>
+      <LoginPage/>
+      {/* <HomePage/> */}
+      {/* <div>
+        <Button variant="outline">Click me</Button>
+      </div> */}
+
     </>
   );
 }
