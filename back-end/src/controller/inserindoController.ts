@@ -29,7 +29,7 @@ export const sendProductToTelegram = async (
     const message = `<b>🔥 Oferta ${topic}!</b>\n${link}`;
     const priceTag = price ? `💰Valor: <b>${price}</b>` : "";
     const descriptionTag = description
-      ? `<b>Descricao: ${description}</b>`
+      ? `<b>Descrição: ${description}</b>`
       : "";
 
     await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -45,3 +45,5 @@ export const sendProductToTelegram = async (
     return res.status(500).json({ error: "Erro interno no servidor." });
   }
 };
+
+export default sendProductToTelegram;
