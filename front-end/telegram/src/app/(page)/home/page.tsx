@@ -60,7 +60,7 @@ export function CardWithForm() {
     }
 
     try {
-      await api.sendProduto(topic, link, descricao, precoNumerico.toString());
+      await api.sendProduto({topic, link, price: precoNumerico, description:descricao });
       alert("Produto enviado com sucesso!");
     } catch (error) {
       alert("Erro ao enviar produto.");

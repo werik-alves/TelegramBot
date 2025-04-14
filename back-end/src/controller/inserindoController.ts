@@ -27,7 +27,7 @@ export const sendProductToTelegram = async (
     }
 
     const message = `<b>🔥 Oferta ${topic}!</b>\n${link}`;
-    const priceTag = price ? `💰Valor: <b>${price}</b>` : "";
+    const priceTag = price ? `💰Valor em R$: <b>${price}</b>` : "";
     const descriptionTag = description
       ? `<b>Descrição: ${description}</b>`
       : "";
