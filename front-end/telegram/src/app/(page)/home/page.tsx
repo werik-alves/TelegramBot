@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,13 +20,14 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import api from "@/services/api/produtos";
+import { useRouter } from "next/navigation";
 
 type TopicKey = "amazon" | "shopee" | "magazine" | "infoprodutos";
 
 export function CardWithForm() {
   const [preco, setPreco] = useState("");
   const [topic, setTopic] = useState<TopicKey | "">("");
-
+  const router = useRouter();
 
   const handlePrecoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let valor = e.target.value.replace(/[^\d,]/g, "");
@@ -65,6 +66,18 @@ export function CardWithForm() {
     } catch (error) {
       alert("Erro ao enviar produto.");
     }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/");
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    router.push("/");
   };
 
   return (
@@ -114,7 +127,7 @@ export function CardWithForm() {
                 </Select>
               </div>
               <CardFooter className="flex justify-between pt-6">
-                <Button variant="outline" type="button">
+                <Button variant="outline" type="button" onClick={handleLogout}>
                   Sair
                 </Button>
                 <Button type="submit">Enviar Produto</Button>

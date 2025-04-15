@@ -4,16 +4,39 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-//import para fazer a navegação
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 export function LoginPage() {
-  const Router = useRouter();
-  const handlerEntrar = () => {
-    Router.push("/home");
+  const router = useRouter();
+
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
+
+  const handlerEntrar = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario, senha }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        router.push("/home");
+      } else {
+        alert(data.error || "Erro ao fazer login");
+      }
+    } catch (err) {
+      console.error("Erro:", err);
+      alert("Erro de conexão com o servidor");
+    }
   };
+
   return (
     <div className="flex h-screen w-full">
-      {/* Lado esquerdo com imagem em tela cheia */}
       <div className="w-1/2 relative">
         <Image
           src="/images/produtos2.png"
@@ -27,12 +50,24 @@ export function LoginPage() {
         <h1 className="text-3xl font-bold mb-6">Login</h1>
         <div className="flex flex-col items-center justify-center gap-6 rounded-lg bg-[#e4a84f88] p-8 shadow-md w-full max-w-sm">
           <div className="grid w-full gap-2">
-            <Label htmlFor="email">Login:</Label>
-            <Input type="email" id="email" placeholder="Email" />
+            <Label htmlFor="usuario">Login:</Label>
+            <Input
+              type="text"
+              id="usuario"
+              placeholder="Usuário"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+            />
           </div>
           <div className="grid w-full gap-2">
-            <Label htmlFor="password">Senha:</Label>
-            <Input type="password" id="password" placeholder="Senha" />
+            <Label htmlFor="senha">Senha:</Label>
+            <Input
+              type="password"
+              id="senha"
+              placeholder="Senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+            />
           </div>
           <div className="grid w-full gap-2">
             <Button
