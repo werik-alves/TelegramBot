@@ -19,6 +19,7 @@ export function LoginPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ usuario, senha }),
+        credentials: "include", // 🔥 precisa disso pro cookie ser aceito
       });
 
       const data = await res.json();

@@ -1,8 +1,7 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const supabase = require("../services/supabaseClient");
 import { Request, Response } from "express";
-
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import supabase from "../services/supabaseClient";
 require("dotenv").config();
 
 interface LoginRequestBody {
@@ -53,11 +52,18 @@ const login = async (
     { expiresIn: "1h" }
   );
 
+  // Envia o token como cookie HTTP-only
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // true se for produção (https)
+    sameSite: "lax",
+    maxAge: 24 * 60 * 60 * 1000, // 1 dia
+  });
+
   return res.status(200).json({
     message: "Login realizado com sucesso!",
-    token,
     usuario: user.usuario,
   });
 };
 
-module.exports = { login };
+export { login };

@@ -5,7 +5,12 @@ const loginRouter = require("./routes/login");
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3030",
+    credentials: true, // Permite o envio de cookies
+  })
+);
 app.use(express.json());
 //✅
 // Usa as rotas do módulo
