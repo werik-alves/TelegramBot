@@ -38,7 +38,7 @@ export function LoginPage() {
 
   return (
     <div className="flex h-screen w-full">
-      <div className="w-1/2 relative">
+      <div className="w-1/2 relative hidden lg:flex">
         <Image
           src="/images/produtos2.png"
           alt="Imagem dos produtos"
@@ -47,7 +47,7 @@ export function LoginPage() {
           priority
         />
       </div>
-      <div className="w-1/2 flex items-center justify-center flex-col bg-[#F9EEE0]">
+      <div className="lg:w-1/2 flex md:flex-1 flex-1 items-center justify-center flex-col bg-[#F9EEE0]">
         <h1 className="text-3xl font-bold mb-6">Login</h1>
         <div className="flex flex-col items-center justify-center gap-6 rounded-lg bg-[#e4a84f88] p-8 shadow-md w-full max-w-sm">
           <div className="grid w-full gap-2">

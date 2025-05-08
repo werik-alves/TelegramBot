@@ -1,0 +1,13 @@
+{
+  "name": "telegrambot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx concurrently \"cd front-end/telegram && npm run dev\" \"cd back-end && npm run dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
